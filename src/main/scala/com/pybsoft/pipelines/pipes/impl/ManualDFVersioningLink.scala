@@ -27,7 +27,6 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
 
     if(debugFlag) System.out.println("-->Starting Pipeline DF Version Link")
 
-
     import spark.implicits._
 
     val initialDF = Seq(
@@ -64,7 +63,6 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
       ("__abc1", "1.0.1", "uuid_19", "SOURCE_TYPE_B", "2019-06-02 16:50:45"),
 
       //Branch of Object 5,which is a branch of Object 3
-
       ("__abc3", "1.0.3_branch", "uuid_24", "SOURCE_TYPE_B", "2019-06-03 12:55:48"),
       ("__abc3", "1.0.2_branch", "uuid_23", "SOURCE_TYPE_B", "2019-06-03 12:50:45"),
       ("__abc3", "1.0.5_branch", "uuid_26", "SOURCE_TYPE_B", "2019-06-04 17:24:28"),
@@ -74,7 +72,6 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
       .toDF("fragment", "version", "uuid", "system", "date")
       //Shuffle a bit more
       .orderBy(rand())
-
 
     if(debugFlag){
       System.out.println("-->Initial Dataframe")
@@ -112,7 +109,6 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
       System.out.println("-->Filtering Null values and removing columns before export")
     }
 
-
     /**
       * DO NOT USE IN PRODUCTION.
       * TODO Replace it by NEO4J Export function. USed to trigger the execution of Spark code
@@ -121,14 +117,10 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
 
     //Unpersist all
     resultDF.unpersist()
-
-
   }
 
   override def terminate(): Unit = {
-
   }
-
 
 }
 

@@ -29,9 +29,7 @@ public class PipeHandler {
         options.addOption("l", "log-level", true, "Set Log level: WARN, FATAL, ERROR, ALL, OFF");
 
         try {
-
             CommandLineParser parser = new DefaultParser();
-
             CommandLine cmd = parser.parse(options,args);
 
             debugFlag =  cmd.hasOption("d");
@@ -63,7 +61,6 @@ public class PipeHandler {
 
             System.out.println("-->Spark Log level:" + Logger.getLogger(LOGGER).getLevel());
 
-
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("javac PipeHandler.java", "Following options available",options,"",true);
@@ -74,25 +71,16 @@ public class PipeHandler {
             System.out.println("-->Something went wrong reading Logger config. Using Spark Log level: OFF" );
         }
 
-
         SparkSession spark = SparkSession.builder().appName("Pipelines").getOrCreate();
 
         List<Pipe> pipeline = new ArrayList<>();
-
         pipeline.add(new ManualDFVersioningLink(debugFlag));
-
-
         pipeline.forEach(p ->{
             p.init();
             p.run(spark);
             p.terminate();
         });
-
         spark.close();
-
-
-
-
     }
 
 }
