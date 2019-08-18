@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.apache.commons.cli.*;
 
-
+/**
+ * Class to create and run different Spark Tasks
+ */
 public class PipeHandler {
 
     private static String LOGGER = "org.apache";
