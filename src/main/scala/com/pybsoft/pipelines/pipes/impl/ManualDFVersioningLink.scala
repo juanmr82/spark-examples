@@ -5,9 +5,14 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql._
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions.lead
-import org.apache.spark.sql.types.TimestampType
 import org.apache.spark.sql.functions.rand
 
+/**
+  * Example of Windowing functions on a simple dataframe. Intended to write
+  * results in Neo4J
+  *
+  * @param debugFlag Set to true to enable verbose
+  */
 class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
 
   var initLogLevel: Level = Logger.getLogger("org.apache").getLevel()
@@ -110,7 +115,7 @@ class ManualDFVersioningLink( val debugFlag:Boolean = false) extends Pipe  {
 
     /**
       * DO NOT USE IN PRODUCTION.
-      * Replace it by NEO4J Export function. USed to trigger the execution of Spark code
+      * TODO Replace it by NEO4J Export function. USed to trigger the execution of Spark code
       */
     resultDF.show(30)
 
