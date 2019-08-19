@@ -17,6 +17,7 @@ import org.apache.commons.cli.*;
  */
 public class PipeHandler {
 
+    private static String APP_NAME = "PipeHandler";
     private static String LOGGER = "org.apache";
 
     public static void main(String[] args){
@@ -70,8 +71,10 @@ public class PipeHandler {
             Logger.getLogger(LOGGER).setLevel(Level.OFF);
             System.out.println("-->Something went wrong reading Logger config. Using Spark Log level: OFF" );
         }
-
-        SparkSession spark = SparkSession.builder().appName("Pipelines").getOrCreate();
+        /**
+        * Creates an Spark Session. Master and other settings are defined during the submit
+        */
+        SparkSession spark = SparkSession.builder().appName(APP_NAME).getOrCreate();
 
         List<Pipe> pipeline = new ArrayList<>();
         pipeline.add(new ManualDFVersioningLink(debugFlag));
